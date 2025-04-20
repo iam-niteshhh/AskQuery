@@ -41,3 +41,6 @@ The app will return:
 
 ## 📁 Project Structure (WIP)
 
+
+## Data Source
+1. https://archive.ics.uci.edu/dataset/222/bank+marketing
