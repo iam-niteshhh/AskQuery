@@ -75,6 +75,6 @@ class DataService:
         if not os.path.isfile(file_full_path):
             raise FileNotFoundError(f"The file {self.csv_file_name} does not exist at {self.file_path}")
 
-        dataset = pd.read_csv(file_full_path)
+        dataset = pd.read_csv(file_full_path,delimiter=';')
 
         return dataset

@@ -3,9 +3,10 @@
 """
 import os
 from Services.data import DataService
+import traceback
 
-class DataHandler:
-    def __init__(self, file_path, zip_file_name,csv_file_name, data_service):
+class DataUsecase:
+    def __init__(self, file_path, zip_file_name,csv_file_name):
         self.file_path = file_path
         self.zip_file_name = zip_file_name
         self.csv_file_name = csv_file_name
@@ -16,7 +17,8 @@ class DataHandler:
         )
 
     def execute(self):
-
+        print("FILES AND DATA HANDLING STARTING")
+        data_set = None
         # checks if the file is already present in the path
         csv_file_full_path = os.path.join(self.file_path, self.csv_file_name)
 
@@ -37,6 +39,8 @@ class DataHandler:
         print("This is the Data info")
         #get data set info
         data_set.info()
+
+        return True, data_set
 
 
 

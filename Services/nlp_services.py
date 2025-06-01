@@ -80,8 +80,8 @@ class IntentExecutorServices:
         try:
             return handler()
 
-        except Exception:
-            return f"An error occurred while handling intent '{intent}'"
+        except Exception as e:
+            return f"An error {e} occurred while handling intent '{intent}'"
 
     def handle_mean_balance(self):
         mean_val = self.dataframe['balance'].mean()
