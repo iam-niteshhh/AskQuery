@@ -4,61 +4,77 @@
 """
 import os
 import zipfile
+import pandas as pd
 
+class DataService:
+    def __init__(self, file_path, zip_file_name, csv_file_name):
+        self.file_path = file_path
+        self.zip_file_name = zip_file_name
+        self.csv_file_name = csv_file_name
+        self._processed_zips = set()  # Keep track of extracted zips
 
-def unzip_the_file(file_path="../Data", file_name="bank+marketing.zip"):
-    """
-        The code walks through the path and unzips the provided file.
-        It also checks if there are any nested zip files inside and extracts them as well.
-    """
+    def unzip_all(self):
+        zip_path = os.path.abspath(os.path.join(self.file_path, self.zip_file_name))
+        print(f"Unzipping {zip_path}")
+        if not os.path.isfile(zip_path):
+            raise FileNotFoundError(f"Zip file not found: {zip_path}")
 
-    # Validate file path
-    if not file_path:
-        raise FileNotFoundError("Please provide a file path")
+        extract_to = os.path.dirname(zip_path)
+        self._extract_and_find_nested(zip_path, extract_to)
 
-    # Validate file name
-    if not file_name:
-        raise FileNotFoundError("Please provide a file name")
+    def _extract_and_find_nested(self, zip_path, extract_to):
+        # Avoid reprocessing the same zip
+        if zip_path in self._processed_zips:
+            return
+        self._processed_zips.add(zip_path)
 
-    # Check if the provided path is a valid directory
-    if not os.path.isdir(file_path):
-        raise NotADirectoryError("Please provide a valid path")
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(extract_to)
+            print(f"Extracted: {zip_path}")
 
-    # Construct the full path to the zip file
-    file_full_path = os.path.join(file_path, file_name)
+        # Optionally delete the zip after extracting to prevent reprocessing
+        # os.remove(zip_path)
 
-    # Check if the zip file exists
-    if not os.path.isfile(file_full_path):
-        raise FileNotFoundError(f"The file {file_name} does not exist at {file_path}")
-
-    try:
-        # Open the zip file
-        with zipfile.ZipFile(file_full_path, mode="r") as zip_ref:
-            is_nested_zips = False
-
-            # Iterate over all files in the zip archive
-            for file in zip_ref.namelist():
-                # If a nested zip file is found
+        for root, _, files in os.walk(extract_to):
+            for file in files:
                 if file.endswith(".zip"):
-                    nested_file_path = os.path.join(file_path, file)
-                    with zipfile.ZipFile(nested_file_path, mode="r") as nested_zip:
-                        print(f"Found nested zip: {file}")
-                        nested_zip.extractall(path=file_path)
-                        is_nested_zips = True
+                    nested_zip_path = os.path.abspath(os.path.join(root, file))
+                    if nested_zip_path not in self._processed_zips:
+                        print(f"Found nested zip: {nested_zip_path}")
+                        self._extract_and_find_nested(nested_zip_path, root)
 
-            # If no nested zips are found, just extract all the files from the main zip
-            if not is_nested_zips:
-                zip_ref.extractall(path=file_path)
-                print(f"Extracted all files from {file_name} to {file_path}")
+    def load_dataset(self):
+        """
+            *********
+                This code load the data set as a data frame
+            *********
 
-            return True
+        :param
+             file_path
+             file_name
+        :return
+            DataFrame
+        """
 
-    except zipfile.BadZipFile:
-        raise zipfile.BadZipFile(f"{file_name} is not a valid zip file.")
+        if not self.file_path:
+            raise FileNotFoundError("Please provide a file path")
 
-    except Exception as e:
-        print(f"An error occurred: {e}")
-        return False
+        if not self.csv_file_name:
+            raise FileNotFoundError("Please provide a file name")
 
+        if not os.path.isdir(self.file_path):
+            raise NotADirectoryError("Please provide a valid path")
 
-print(unzip_the_file())
+        if not self.csv_file_name.endswith(".csv"):
+            raise FileNotFoundError("Please Provide a CSV file name")
+
+        # Construct the full path to the zip file
+        file_full_path = os.path.normpath(os.path.join(self.file_path, self.csv_file_name))
+
+        # Check if the zip file exists
+        if not os.path.isfile(file_full_path):
+            raise FileNotFoundError(f"The file {self.csv_file_name} does not exist at {self.file_path}")
+
+        dataset = pd.read_csv(file_full_path)
+
+        return dataset
