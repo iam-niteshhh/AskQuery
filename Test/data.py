@@ -3,7 +3,7 @@ from Services.data import DataService
 
 
 if __name__ == "__main__":
-    file_path = "./Data"
+    file_path = "../Data"
     zip_file_name = "bank+marketing.zip"
     csv_file_name = "bank.csv"
     data_service = DataService(
