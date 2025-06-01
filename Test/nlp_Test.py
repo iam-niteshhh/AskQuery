@@ -1,7 +1,7 @@
 import constants
 import nltk
-from Usecases.nlp import NLPUseCase
-from Services.nlp import NLPServices
+from Usecases.query_processing import QueryProcessingUseCase
+from Services.nlp_services import NLPServices
 nltk.download('punkt')
 nltk.download('stopwords')
 nltk.download('wordnet')
@@ -10,11 +10,11 @@ nltk.download('wordnet')
 
 if __name__ == "__main__":
     nlp_services = NLPServices(
-        intent_keywords=constants.intent_keywords,
+        intent_keywords=constants.INTENT_KEYWORDS,
     )
-    for query in constants.queries:
-        nlp_usecase = NLPUseCase(
+    for query in constants.QUERIES:
+        nlpqueryprocessing_usecase = QueryProcessingUseCase(
             nlp_service=nlp_services,
             query=query
         )
-        nlp_usecase.execute()
+        nlpqueryprocessing_usecase.execute()
