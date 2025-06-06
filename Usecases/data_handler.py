@@ -17,7 +17,6 @@ class DataUsecase:
         )
 
     def execute(self):
-        print("FILES AND DATA HANDLING STARTING")
         data_set = None
         # checks if the file is already present in the path
         csv_file_full_path = os.path.join(self.file_path, self.csv_file_name)
@@ -33,12 +32,12 @@ class DataUsecase:
         data_set =  self.data_service.load_dataset()
 
         # get the data set tops
-        print("This is the top Rows")
-        data_set.head()
+        # print("This is the top Rows")
+        # data_set.head()
 
-        print("This is the Data info")
+        # print("This is the Data info")
         #get data set info
-        data_set.info()
+        # data_set.info()
 
         return True, data_set
 

@@ -21,7 +21,7 @@ try:
     )
     status, data_set = data_handler_usecase.execute()
     st.success("File loaded successfully!")
-
+    # print("loaded")
     if status:
         if data_set is not None:
             st.write("Here is a preview of your data:")

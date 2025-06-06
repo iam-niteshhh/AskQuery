@@ -15,7 +15,7 @@ class DataService:
 
     def unzip_all(self):
         zip_path = os.path.abspath(os.path.join(self.file_path, self.zip_file_name))
-        print(f"Unzipping {zip_path}")
+        # print(f"Unzipping {zip_path}")
         if not os.path.isfile(zip_path):
             raise FileNotFoundError(f"Zip file not found: {zip_path}")
 
@@ -30,7 +30,7 @@ class DataService:
 
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_ref.extractall(extract_to)
-            print(f"Extracted: {zip_path}")
+            # print(f"Extracted: {zip_path}")
 
         # Optionally delete the zip after extracting to prevent reprocessing
         # os.remove(zip_path)
@@ -40,7 +40,7 @@ class DataService:
                 if file.endswith(".zip"):
                     nested_zip_path = os.path.abspath(os.path.join(root, file))
                     if nested_zip_path not in self._processed_zips:
-                        print(f"Found nested zip: {nested_zip_path}")
+                        # print(f"Found nested zip: {nested_zip_path}")
                         self._extract_and_find_nested(nested_zip_path, root)
 
     def load_dataset(self):

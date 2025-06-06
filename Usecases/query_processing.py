@@ -7,23 +7,22 @@ class QueryProcessingUseCase:
         self.nlp_service = nlp_service
         self.query = query
         self.dataframe = dataframe
-        self.intent_executor = IntentExecutorServices(
-            dataframe=dataframe,
-            query=query,
-        )
+        self.intent_executor = None
 
     def execute(self):
 
-        intent = self.nlp_service.detect_intents(self.query)
-
-        matched_columns = []
-        matched_columns = self.nlp_service.match_column(
-            user_question = self.query,
-            df_columns = self.dataframe.columns,
-            threshold = constants.COLUMN_MATCH_THRESHOLD,
+        parsed_intent = self.nlp_service.parse_query(
+            query=self.query,
+            df_columns=self.dataframe.columns,
+            threshold=constants.COLUMN_MATCH_THRESHOLD,
         )
+        print(parsed_intent)
 
-        result = self.intent_executor.get_intent(intent)
+        self.intent_executor = IntentExecutorServices(
+            dataframe=self.dataframe,
+            query_intent=parsed_intent,
+        )
+        result = self.intent_executor.execute()
 
         return result
 

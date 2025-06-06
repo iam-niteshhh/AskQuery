@@ -16,18 +16,28 @@ class NLPServices:
         tokens = word_tokenize(query.lower())
         return [word for word in tokens if word.isalpha() and word not in self.stop_words]
 
-    def detect_intents(self, query):
+    def parse_query(self, query, df_columns, threshold = 70):
         tokens = self.preprocess(query)
-        scores = {intent: 0 for intent in self.intent_keywords}
+        action_scores = {intent: 0 for intent in self.intent_keywords}
 
         for intent, keywords in self.intent_keywords.items():
             for keyword in keywords:
                 if any(keyword in token for token in tokens) or keyword in query.lower():
-                    scores[intent] += 1
+                    action_scores[intent] += 1
 
-        best_intent = max(scores, key=scores.get)
+        best_intent = max(action_scores, key=action_scores.get)
+        if action_scores[best_intent] == 0:
+            best_intent = None
 
-        return best_intent if scores[best_intent] > 0 else None
+        matched_column = None
+        if best_intent is not None:
+            matched_column = self.match_column(query, df_columns, threshold)
+
+        return {
+            "action": best_intent,
+            "column": matched_column[0] if matched_column else None,
+            "column_match_score": matched_column[1] if matched_column else None,
+        }
 
     def match_column(self, user_question, df_columns, threshold=70):
         """
@@ -55,85 +65,58 @@ class NLPServices:
         # Sort matched columns by score in descending order to prioritize the best matches
         matched_columns.sort(key=lambda x: x[1], reverse=True)
 
-        # Return only the column names (not the scores)
-        return [col for col, _ in matched_columns]
+        # Return only the column names
+        # for now only return the max matched column
+        return matched_columns[0]
 
 class IntentExecutorServices:
-    def __init__(self, dataframe, query):
-        self.intent_handlers_mapping = constants.INTENT_HANDLERS
+    def __init__(self, dataframe, query_intent):
         self.dataframe = dataframe
-        self.query = query.lower()
+        self.query_intent = query_intent
 
-    def get_intent(self, intent):
+    def execute(self):
+        action = self.query_intent.get("action")
+        column = self.query_intent.get("column")
 
-        if intent not in self.intent_handlers_mapping:
-            return f"Unrecognized intent: {intent}"
+        print(action, column)
+        if not action or not column:
+            return "Could not understand the intent or column."
 
-        handler_name = self.intent_handlers_mapping[intent]
-
-        # Use Python's dynamic getattr to get the actual method from this class
-        handler = getattr(self, handler_name, None)
-
-        if not handler:
-            return f"No handler found for intent: {intent}"
-
-        try:
-            return handler()
-
-        except Exception as e:
-            return f"An error {e} occurred while handling intent '{intent}'"
-
-    def handle_mean_balance(self):
-        mean_val = self.dataframe['balance'].mean()
-        return f"Average balance is {mean_val:.2f}"
-
-    def handle_count_default(self):
-        count = self.dataframe[self.dataframe['default'] == 'yes'].shape[0]
-        return f"Number of clients who defaulted: {count}"
-
-    def handle_filter_clients(self):
-        # Example: parse filter condition like "joined after 2020"
-        year = self.parse_year_filter()
-        if year:
-            filtered_df = self.dataframe[self.dataframe['join_year'] > year]
-            return self.format_dataframe(filtered_df)
+        # Dispatch to dynamic handler
+        if action == "average":
+            return self.handle_average(column)
+        elif action == "sum":
+            return self.handle_sum(column)
+        elif action == "count":
+            return self.handle_count(column)
+        elif action == "filter":
+            return self.handle_filter(column)
         else:
-            return "No valid filter condition found."
+            return f"Action '{action}' is not supported yet"
 
-    def handle_count_subscribed(self):
-        count = self.dataframe[self.dataframe['subscribed'] == 'yes'].shape[0]
-        return f"Number of clients subscribed: {count}"
+    def handle_average(self, column):
+        if column not in self.dataframe.columns:
+            return f"Column '{column}' not found."
+        mean_val = self.dataframe[column].mean()
+        return f"Average {column} is {mean_val:.2f}"
 
-    def handle_filter_job_marital(self):
-        # Filter for job or marital status keywords in query
-        filters = []
-        if 'unemployed' in self.query:
-            filters.append(self.dataframe['job'] == 'unemployed')
-        if 'married' in self.query:
-            filters.append(self.dataframe['marital'] == 'married')
-        if 'single' in self.query:
-            filters.append(self.dataframe['marital'] == 'single')
+    def handle_sum(self, column):
+        if column not in self.dataframe.columns:
+            return f"Column '{column}' not found."
+        sum_val = self.dataframe[column].sum()
+        return f"Sum of {column} is {sum_val}"
 
-        if filters:
-            combined_filter = filters[0]
-            for f in filters[1:]:
-                combined_filter |= f
-            filtered_df = self.dataframe[combined_filter]
-            return self.format_dataframe(filtered_df)
-        else:
-            return "No job/marital filter found in query."
+    def handle_count(self, column):
+        if column not in self.dataframe.columns:
+            return f"Column '{column}' not found."
+        count_val = self.dataframe[column].count()
+        return f"Count of {column} is {count_val}"
 
-    # Helper method to parse a year from query for filtering
-    def parse_year_filter(self):
-        # Simple regex to find "after YYYY" pattern
-        match = re.search(r'after (\d{4})', self.query)
-        if match:
-            return int(match.group(1))
-        return None
+    def handle_filter(self, column):
+        # For filter, you may want to parse more details from the query.
+        # As a placeholder, just show unique values:
+        if column not in self.dataframe.columns:
+            return f"Column '{column}' not found."
+        unique_vals = self.dataframe[column].unique()
+        return f"Unique values in {column}: {unique_vals}"
 
-    # Helper method to format DataFrame nicely
-    def format_dataframe(self, df):
-        if df.empty:
-            return "No results found."
-        # Convert to string table, show first 10 rows max
-        return df.head(10).to_string(index=False)

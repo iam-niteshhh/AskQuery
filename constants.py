@@ -1,33 +1,39 @@
 INTENT_KEYWORDS = {
-    'mean_balance': [
-        'average balance',
-        'mean balance',
-        'avg balance'
+    "mean": [
+        "average",
+        "mean",
+        "avg"
     ],
-    'count_default': [
-        'how many default',
-        'number of defaults',
-        'clients defaulted'
+    "sum": [
+        "sum",
+        "total",
+        "add up",
+        "aggregate"
     ],
-    'filter_clients': [
-        'filter clients',
-        'show clients',
-        'only clients'
+    "count": [
+        "count",
+        "number of",
+        "how many"
     ],
-    'count_subscribed': [
-        'how many subscribed',
-        'clients said yes',
-        'who said yes',
-        'subscribed to term deposit',
-        'subscribed'
+    "max": [
+        "maximum",
+        "max",
+        "highest",
+        "top"
     ],
-    'filter_job_marital': [
-        'unemployed',
-        'married',
-        'single',
-        'job',
-        'marital'
-    ]
+    "min": [
+        "minimum",
+        "min",
+        "lowest",
+        "bottom"
+    ],
+    "filter": [
+        "filter",
+        "show",
+        "only",
+        "where",
+        "with"
+    ],
 }
 
 QUERIES = [
