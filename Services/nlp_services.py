@@ -82,7 +82,14 @@ class IntentExecutorServices:
         if not action or not column:
             return "Could not understand the intent or column."
 
-        # Dispatch to dynamic handler
+        if column not in self.dataframe.columns:
+            return f"Column '{column}' not found."
+
+        # Numeric checks for mean and sum
+        if action in ["average", "sum"]:
+            if not pd.api.types.is_numeric_dtype(self.dataframe[column]):
+                return f"Column '{column}' must be numeric for {action} operation."
+
         if action == "average":
             return self.handle_average(column)
         elif action == "sum":
@@ -95,28 +102,17 @@ class IntentExecutorServices:
             return f"Action '{action}' is not supported yet"
 
     def handle_average(self, column):
-        if column not in self.dataframe.columns:
-            return f"Column '{column}' not found."
         mean_val = self.dataframe[column].mean()
-        return f"Average {column} is {mean_val:.2f}"
+        return f"Average {column}: {mean_val:.2f}"
 
     def handle_sum(self, column):
-        if column not in self.dataframe.columns:
-            return f"Column '{column}' not found."
         sum_val = self.dataframe[column].sum()
-        return f"Sum of {column} is {sum_val}"
+        return f"Sum of {column}: {sum_val}"
 
     def handle_count(self, column):
-        if column not in self.dataframe.columns:
-            return f"Column '{column}' not found."
         count_val = self.dataframe[column].count()
-        return f"Count of {column} is {count_val}"
+        return f"Count of {column}: {count_val}"
 
     def handle_filter(self, column):
-        # For filter, you may want to parse more details from the query.
-        # As a placeholder, just show unique values:
-        if column not in self.dataframe.columns:
-            return f"Column '{column}' not found."
         unique_vals = self.dataframe[column].unique()
-        return f"Unique values in {column}: {unique_vals}"
-
+        return f"Unique values in {column}: {list(unique_vals)}"
