@@ -4,12 +4,14 @@ from nltk.corpus import stopwords
 from fuzzywuzzy import fuzz
 from streamlit import dataframe
 import re
+import pandas as pd
+from Services.charts_services import VisualizationServices
 
 import constants
 
 class NLPServices:
     def __init__(self, intent_keywords):
-        self.intent_keywords = intent_keywords
+        self.intent_keywords = intent_keywords if intent_keywords else constants.INTENT_KEYWORDS
         self.stop_words = set(stopwords.words('english'))
 
     def preprocess(self, query):
@@ -80,28 +82,30 @@ class IntentExecutorServices:
 
         print(action, column)
         if not action or not column:
-            return "Could not understand the intent or column."
+            raise ValueError("Could not understand the intent or column.")
 
         if column not in self.dataframe.columns:
-            return f"Column '{column}' not found."
+            raise ValueError(f"Column '{column}' not found.")
 
         # Numeric checks for mean and sum
-        if action in ["average", "sum"]:
+        if action in ["mean", "sum"]:
             if not pd.api.types.is_numeric_dtype(self.dataframe[column]):
-                return f"Column '{column}' must be numeric for {action} operation."
+                raise ValueError(f"Column '{column}' must be numeric for {action} operation.")
 
-        if action == "average":
-            return self.handle_average(column)
+        if action == "mean":
+            result =  self.handle_mean(column)
         elif action == "sum":
-            return self.handle_sum(column)
+            result = self.handle_sum(column)
         elif action == "count":
-            return self.handle_count(column)
+            result = self.handle_count(column)
         elif action == "filter":
-            return self.handle_filter(column)
+            result = self.handle_filter(column)
         else:
-            return f"Action '{action}' is not supported yet"
+            raise f"Action '{action}' is not supported yet"
 
-    def handle_average(self, column):
+        return result
+
+    def handle_mean(self, column):
         mean_val = self.dataframe[column].mean()
         return f"Average {column}: {mean_val:.2f}"
 

@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-
+import matplotlib.figure
 import constants
 from Services.data import DataService
 from Usecases.data_handler import DataUsecase
@@ -42,13 +42,21 @@ try:
                     query=query,
                     dataframe=data_set,
                 )
-                result = queryprocessing_usecase.execute()
+                result, fig, file_message = queryprocessing_usecase.execute()
 
                 st.markdown("#### Result:")
                 if isinstance(result, pd.DataFrame):
                     st.dataframe(result)
                 else:
                     st.write(result)
+
+                if isinstance(fig, matplotlib.figure.Figure):
+                    st.pyplot(fig)
+
+                if file_message is not None:
+                    st.write(file_message)
+
+
         else:
             st.error("Could not read file. Make sure it's a valid zip or CSV.")
 except Exception as e:

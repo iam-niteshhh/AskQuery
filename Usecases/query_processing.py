@@ -1,6 +1,8 @@
 import nltk
 from Services.nlp_services import IntentExecutorServices
 import constants
+from Services.charts_services import VisualizationServices
+
 
 class QueryProcessingUseCase:
     def __init__(self, nlp_service, query, dataframe):
@@ -8,6 +10,7 @@ class QueryProcessingUseCase:
         self.query = query
         self.dataframe = dataframe
         self.intent_executor = None
+        self.visualizer = None
 
     def execute(self):
 
@@ -24,5 +27,10 @@ class QueryProcessingUseCase:
         )
         result = self.intent_executor.execute()
 
-        return result
+        self.visualizer = VisualizationServices(
+            dataframe=self.dataframe,
+            query_intent=parsed_intent,
+        )
+        fig, file_message = self.visualizer.execute()
+        return result, fig, file_message
 
