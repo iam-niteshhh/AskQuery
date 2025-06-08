@@ -1,3 +1,6 @@
+import os
+
+import joblib
 import nltk
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -13,23 +16,38 @@ class NLPServices:
     def __init__(self, intent_keywords):
         self.intent_keywords = intent_keywords if intent_keywords else constants.INTENT_KEYWORDS
         self.stop_words = set(stopwords.words('english'))
+        self.intent_classifier, self.query_vectorizer = self.load_model()
 
     def preprocess(self, query):
         tokens = word_tokenize(query.lower())
         return [word for word in tokens if word.isalpha() and word not in self.stop_words]
 
     def parse_query(self, query, df_columns, threshold = 70):
-        tokens = self.preprocess(query)
-        action_scores = {intent: 0 for intent in self.intent_keywords}
 
-        for intent, keywords in self.intent_keywords.items():
-            for keyword in keywords:
-                if any(keyword in token for token in tokens) or keyword in query.lower():
-                    action_scores[intent] += 1
+        # This is rule based Intent Detection
 
-        best_intent = max(action_scores, key=action_scores.get)
-        if action_scores[best_intent] == 0:
-            best_intent = None
+        # tokens = self.preprocess(query)
+        # action_scores = {intent: 0 for intent in self.intent_keywords}
+        #
+        # for intent, keywords in self.intent_keywords.items():
+        #     for keyword in keywords:
+        #         if any(keyword in token for token in tokens) or keyword in query.lower():
+        #             action_scores[intent] += 1
+        #
+        # best_intent = max(action_scores, key=action_scores.get)
+        # if action_scores[best_intent] == 0:
+        #     best_intent = None
+
+
+        # This is ML based Intent Detection - Created by Synthetic data
+        print("QUery", query)
+        x_vector = self.query_vectorizer.transform([query])
+        intent_prediction = self.intent_classifier.predict(x_vector)
+
+        best_intent = None
+        if intent_prediction:
+            print("this is intent", intent_prediction)
+            best_intent = intent_prediction[0]
 
         matched_column = None
         if best_intent is not None:
@@ -70,6 +88,22 @@ class NLPServices:
         # Return only the column names
         # for now only return the max matched column
         return matched_columns[0]
+
+    def load_model(self, model_name = 'clf_folded.joblib', vector_name = 'vectorizer_folded.joblib'):
+
+        if not model_name:
+            raise Exception('No model path provided.')
+
+        model_path = os.path.join('./models/', model_name)
+        vectorizer_path = os.path.join('./models/', vector_name)
+
+        if not os.path.exists(model_path):
+            raise Exception('Model path does not exist.')
+
+        classifier_model = joblib.load(model_path)
+        vectorizer = joblib.load(vectorizer_path)
+
+        return classifier_model, vectorizer
 
 class IntentExecutorServices:
     def __init__(self, dataframe, query_intent):
@@ -120,3 +154,5 @@ class IntentExecutorServices:
     def handle_filter(self, column):
         unique_vals = self.dataframe[column].unique()
         return f"Unique values in {column}: {list(unique_vals)}"
+
+

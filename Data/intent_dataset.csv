@@ -1,0 +1,1001 @@
+query,intent
+What is the minimum pdays?,min
+What is the average pdays?,mean
+What is the avg campaign?,mean
+What is the sum duration?,sum
+What is the highest previous?,max
+What is the average balance?,mean
+What is the mean previous?,mean
+What is the min day?,min
+What is the average previous?,mean
+What is the avg balance?,mean
+What is the average age?,mean
+only duration = 94,filter
+filter age = 39,filter
+What is the max duration?,max
+What is the average age?,mean
+What is the minimum balance?,min
+What is the avg previous?,mean
+What is the total day?,sum
+What is the minimum day?,min
+What is the avg campaign?,mean
+only month = aug,filter
+only campaign = 46,filter
+What is the aggregate duration?,sum
+What is the sum previous?,sum
+What is the top balance?,max
+What is the total pdays?,sum
+What is the mean pdays?,mean
+What is the max pdays?,max
+What is the aggregate pdays?,sum
+What is the avg campaign?,mean
+Number of of clients with job = student,count
+What is the minimum pdays?,min
+What is the total pdays?,sum
+What is the mean pdays?,mean
+Count of clients with pdays,count
+What is the mean day?,mean
+show balance = 60,filter
+with previous = 47,filter
+What is the highest previous?,max
+What is the top balance?,max
+What is the total duration?,sum
+What is the min pdays?,min
+What is the sum day?,sum
+What is the bottom day?,min
+What is the maximum day?,max
+Number of of clients with marital = married,count
+What is the avg duration?,mean
+What is the total age?,sum
+What is the average duration?,mean
+What is the sum age?,sum
+with education = tertiary,filter
+Number of of clients with campaign,count
+What is the avg duration?,mean
+What is the average day?,mean
+What is the min age?,min
+What is the max campaign?,max
+What is the average duration?,mean
+What is the highest duration?,max
+What is the minimum day?,min
+What is the minimum day?,min
+Count of clients with job = management,count
+What is the min age?,min
+Count of clients with month = aug,count
+What is the avg duration?,mean
+What is the average balance?,mean
+Count of clients with day,count
+What is the lowest balance?,min
+What is the average campaign?,mean
+Count of clients with day,count
+What is the aggregate pdays?,sum
+filter pdays = 91,filter
+What is the avg age?,mean
+What is the total age?,sum
+What is the average duration?,mean
+What is the total campaign?,sum
+What is the max pdays?,max
+Number of of clients with loan = yes,count
+filter education = primary,filter
+What is the mean day?,mean
+What is the minimum balance?,min
+What is the aggregate previous?,sum
+Number of of clients with marital = married,count
+What is the min balance?,min
+What is the sum duration?,sum
+show balance = 75,filter
+What is the highest duration?,max
+How many of clients with marital = divorced,count
+Number of of clients with marital = single,count
+only education = primary,filter
+What is the highest previous?,max
+What is the minimum age?,min
+What is the maximum duration?,max
+only duration = 49,filter
+What is the bottom age?,min
+filter day = 26,filter
+What is the sum duration?,sum
+where previous = 84,filter
+What is the add up previous?,sum
+only poutcome = unknown,filter
+What is the min duration?,min
+What is the min balance?,min
+What is the mean balance?,mean
+What is the average duration?,mean
+What is the max campaign?,max
+show previous = 50,filter
+What is the bottom day?,min
+What is the top previous?,max
+What is the lowest campaign?,min
+What is the average campaign?,mean
+only loan = no,filter
+where loan = no,filter
+where pdays = 64,filter
+What is the minimum previous?,min
+What is the max previous?,max
+What is the top previous?,max
+filter contact = unknown,filter
+Count of clients with loan = no,count
+What is the average previous?,mean
+What is the average balance?,mean
+What is the maximum pdays?,max
+What is the max campaign?,max
+How many of clients with loan = yes,count
+How many of clients with duration,count
+What is the top day?,max
+with month = mar,filter
+with pdays = 23,filter
+How many of clients with contact = telephone,count
+What is the sum age?,sum
+What is the total balance?,sum
+only poutcome = unknown,filter
+What is the bottom previous?,min
+with education = secondary,filter
+What is the maximum pdays?,max
+How many of clients with loan = no,count
+only marital = divorced,filter
+only balance = 69,filter
+How many of clients with age,count
+Number of of clients with pdays,count
+What is the mean previous?,mean
+What is the mean age?,mean
+What is the average age?,mean
+where housing = yes,filter
+What is the total balance?,sum
+What is the maximum pdays?,max
+What is the add up day?,sum
+What is the mean age?,mean
+What is the total campaign?,sum
+What is the bottom campaign?,min
+What is the lowest balance?,min
+What is the mean age?,mean
+What is the top day?,max
+Count of clients with job = blue-collar,count
+What is the average balance?,mean
+What is the average duration?,mean
+What is the top duration?,max
+What is the max balance?,max
+Count of clients with month = nov,count
+What is the highest campaign?,max
+Count of clients with month = apr,count
+What is the total pdays?,sum
+What is the mean day?,mean
+What is the minimum pdays?,min
+What is the sum previous?,sum
+What is the aggregate balance?,sum
+What is the avg pdays?,mean
+How many of clients with poutcome = other,count
+where balance = 34,filter
+What is the lowest age?,min
+What is the max previous?,max
+What is the aggregate day?,sum
+What is the minimum age?,min
+How many of clients with pdays,count
+What is the max day?,max
+only age = 28,filter
+What is the mean age?,mean
+What is the bottom campaign?,min
+What is the top age?,max
+Count of clients with month = jun,count
+Count of clients with default = no,count
+How many of clients with age,count
+What is the sum balance?,sum
+What is the bottom campaign?,min
+What is the max day?,max
+How many of clients with contact = unknown,count
+How many of clients with campaign,count
+What is the sum age?,sum
+Number of of clients with pdays,count
+What is the sum campaign?,sum
+What is the add up day?,sum
+What is the aggregate pdays?,sum
+What is the add up balance?,sum
+What is the mean balance?,mean
+with balance = 32,filter
+filter loan = yes,filter
+What is the average balance?,mean
+How many of clients with age,count
+What is the add up pdays?,sum
+What is the min age?,min
+What is the bottom balance?,min
+What is the minimum pdays?,min
+What is the average previous?,mean
+What is the highest duration?,max
+What is the sum duration?,sum
+What is the mean balance?,mean
+What is the mean pdays?,mean
+with balance = 91,filter
+with marital = divorced,filter
+How many of clients with pdays,count
+What is the highest day?,max
+What is the sum balance?,sum
+What is the top day?,max
+What is the average previous?,mean
+What is the lowest previous?,min
+Number of of clients with campaign,count
+Number of of clients with age,count
+What is the total previous?,sum
+Number of of clients with loan = no,count
+What is the minimum duration?,min
+How many of clients with default = yes,count
+What is the maximum age?,max
+What is the add up pdays?,sum
+How many of clients with housing = no,count
+What is the total day?,sum
+What is the avg previous?,mean
+What is the bottom age?,min
+What is the lowest age?,min
+What is the maximum duration?,max
+What is the add up age?,sum
+with job = unemployed,filter
+What is the aggregate day?,sum
+What is the average duration?,mean
+What is the mean day?,mean
+Number of of clients with default = no,count
+What is the aggregate day?,sum
+What is the top day?,max
+where day = 32,filter
+Count of clients with balance,count
+What is the aggregate campaign?,sum
+where previous = 29,filter
+What is the mean campaign?,mean
+Count of clients with loan = no,count
+filter balance = 86,filter
+What is the avg pdays?,mean
+where previous = 95,filter
+What is the max age?,max
+What is the average pdays?,mean
+only poutcome = other,filter
+only balance = 42,filter
+Count of clients with education = primary,count
+Number of of clients with contact = cellular,count
+filter age = 11,filter
+where age = 12,filter
+What is the sum previous?,sum
+What is the mean balance?,mean
+What is the avg age?,mean
+What is the bottom pdays?,min
+What is the minimum pdays?,min
+What is the lowest age?,min
+What is the minimum previous?,min
+What is the add up campaign?,sum
+What is the maximum duration?,max
+How many of clients with default = no,count
+What is the max day?,max
+What is the min age?,min
+What is the lowest duration?,min
+What is the bottom campaign?,min
+Number of of clients with duration,count
+What is the mean age?,mean
+What is the aggregate campaign?,sum
+What is the lowest duration?,min
+Number of of clients with job = blue-collar,count
+What is the minimum campaign?,min
+What is the minimum day?,min
+Number of of clients with housing = no,count
+What is the maximum previous?,max
+What is the maximum previous?,max
+Number of of clients with loan = yes,count
+What is the avg duration?,mean
+with loan = yes,filter
+Number of of clients with duration,count
+with age = 87,filter
+What is the bottom day?,min
+only balance = 35,filter
+Number of of clients with month = aug,count
+What is the mean age?,mean
+What is the min age?,min
+What is the sum pdays?,sum
+What is the lowest pdays?,min
+What is the avg pdays?,mean
+What is the avg pdays?,mean
+What is the mean campaign?,mean
+What is the add up previous?,sum
+What is the mean previous?,mean
+What is the top previous?,max
+What is the maximum campaign?,max
+Count of clients with education = tertiary,count
+What is the total duration?,sum
+What is the maximum duration?,max
+Count of clients with day,count
+What is the min balance?,min
+show housing = yes,filter
+What is the min duration?,min
+filter marital = divorced,filter
+with previous = 83,filter
+What is the maximum balance?,max
+show age = 91,filter
+What is the minimum age?,min
+What is the maximum pdays?,max
+What is the avg duration?,mean
+Count of clients with loan = no,count
+What is the top day?,max
+What is the lowest duration?,min
+What is the avg day?,mean
+What is the top balance?,max
+What is the sum previous?,sum
+What is the avg duration?,mean
+What is the top pdays?,max
+What is the top previous?,max
+How many of clients with balance,count
+What is the max campaign?,max
+What is the bottom pdays?,min
+show poutcome = failure,filter
+Count of clients with default = yes,count
+What is the max previous?,max
+What is the maximum previous?,max
+What is the top previous?,max
+How many of clients with housing = no,count
+What is the min campaign?,min
+What is the total duration?,sum
+What is the add up duration?,sum
+What is the mean duration?,mean
+with contact = telephone,filter
+What is the aggregate day?,sum
+What is the maximum pdays?,max
+show contact = cellular,filter
+What is the average day?,mean
+What is the add up campaign?,sum
+show age = 93,filter
+Number of of clients with poutcome = other,count
+What is the minimum day?,min
+What is the aggregate duration?,sum
+What is the add up day?,sum
+What is the avg duration?,mean
+What is the max previous?,max
+What is the total age?,sum
+What is the max day?,max
+What is the bottom campaign?,min
+What is the add up age?,sum
+What is the highest pdays?,max
+What is the maximum duration?,max
+What is the mean balance?,mean
+Count of clients with education = unknown,count
+show day = 75,filter
+What is the mean campaign?,mean
+What is the sum pdays?,sum
+What is the min previous?,min
+filter month = sep,filter
+What is the mean previous?,mean
+only balance = 78,filter
+What is the mean campaign?,mean
+Count of clients with job = entrepreneur,count
+Number of of clients with duration,count
+What is the top previous?,max
+What is the average pdays?,mean
+What is the mean balance?,mean
+Number of of clients with education = primary,count
+Number of of clients with previous,count
+Count of clients with contact = telephone,count
+What is the add up age?,sum
+What is the maximum day?,max
+What is the lowest duration?,min
+What is the average campaign?,mean
+What is the lowest day?,min
+What is the bottom duration?,min
+Number of of clients with duration,count
+What is the sum balance?,sum
+What is the bottom balance?,min
+How many of clients with housing = yes,count
+What is the aggregate pdays?,sum
+How many of clients with education = unknown,count
+What is the sum age?,sum
+What is the min age?,min
+What is the minimum campaign?,min
+What is the aggregate previous?,sum
+Number of of clients with loan = no,count
+What is the highest previous?,max
+What is the aggregate balance?,sum
+What is the mean pdays?,mean
+Number of of clients with housing = no,count
+where balance = 53,filter
+What is the minimum pdays?,min
+What is the total pdays?,sum
+What is the aggregate campaign?,sum
+What is the top duration?,max
+What is the min day?,min
+How many of clients with day,count
+What is the bottom previous?,min
+How many of clients with campaign,count
+What is the average balance?,mean
+How many of clients with marital = divorced,count
+What is the maximum previous?,max
+What is the aggregate campaign?,sum
+What is the average balance?,mean
+What is the average previous?,mean
+What is the aggregate pdays?,sum
+What is the aggregate age?,sum
+What is the max previous?,max
+What is the avg previous?,mean
+What is the add up previous?,sum
+What is the lowest pdays?,min
+What is the aggregate day?,sum
+What is the minimum age?,min
+What is the highest balance?,max
+What is the minimum campaign?,min
+What is the maximum duration?,max
+only pdays = 55,filter
+How many of clients with pdays,count
+What is the average campaign?,mean
+What is the avg pdays?,mean
+What is the mean age?,mean
+show poutcome = unknown,filter
+What is the total campaign?,sum
+only education = unknown,filter
+Number of of clients with campaign,count
+What is the mean previous?,mean
+What is the total day?,sum
+where education = secondary,filter
+How many of clients with housing = yes,count
+where previous = 10,filter
+What is the highest age?,max
+only balance = 13,filter
+What is the min previous?,min
+filter campaign = 53,filter
+filter day = 54,filter
+What is the top age?,max
+What is the min balance?,min
+What is the avg age?,mean
+What is the min previous?,min
+What is the mean balance?,mean
+What is the max campaign?,max
+where day = 17,filter
+What is the mean balance?,mean
+What is the highest campaign?,max
+What is the average duration?,mean
+What is the aggregate campaign?,sum
+What is the aggregate age?,sum
+What is the total balance?,sum
+only default = yes,filter
+What is the mean previous?,mean
+What is the minimum balance?,min
+What is the lowest day?,min
+What is the highest duration?,max
+filter job = self-employed,filter
+What is the average age?,mean
+Number of of clients with marital = divorced,count
+What is the top balance?,max
+What is the maximum previous?,max
+Count of clients with job = blue-collar,count
+with job = technician,filter
+What is the aggregate duration?,sum
+What is the bottom campaign?,min
+What is the lowest pdays?,min
+What is the minimum campaign?,min
+What is the avg pdays?,mean
+What is the max pdays?,max
+What is the bottom duration?,min
+What is the aggregate campaign?,sum
+What is the minimum age?,min
+with default = no,filter
+What is the top balance?,max
+Count of clients with default = no,count
+What is the minimum age?,min
+show previous = 38,filter
+What is the total duration?,sum
+What is the aggregate campaign?,sum
+What is the maximum campaign?,max
+What is the max age?,max
+filter month = sep,filter
+What is the aggregate day?,sum
+What is the aggregate duration?,sum
+Number of of clients with pdays,count
+What is the bottom day?,min
+What is the aggregate pdays?,sum
+What is the maximum previous?,max
+show previous = 11,filter
+What is the mean balance?,mean
+Count of clients with campaign,count
+What is the aggregate campaign?,sum
+What is the lowest balance?,min
+How many of clients with marital = single,count
+What is the min campaign?,min
+What is the maximum age?,max
+Count of clients with balance,count
+What is the total age?,sum
+Count of clients with campaign,count
+What is the mean balance?,mean
+What is the total balance?,sum
+What is the add up campaign?,sum
+What is the minimum duration?,min
+What is the add up pdays?,sum
+What is the sum previous?,sum
+What is the top age?,max
+What is the top day?,max
+What is the max balance?,max
+What is the total balance?,sum
+What is the avg previous?,mean
+How many of clients with contact = cellular,count
+What is the mean campaign?,mean
+Count of clients with previous,count
+What is the maximum previous?,max
+What is the lowest day?,min
+What is the max pdays?,max
+Number of of clients with housing = no,count
+What is the aggregate balance?,sum
+Number of of clients with pdays,count
+What is the average previous?,mean
+What is the min age?,min
+What is the aggregate balance?,sum
+What is the add up balance?,sum
+What is the min previous?,min
+What is the min campaign?,min
+What is the average duration?,mean
+What is the sum day?,sum
+What is the average pdays?,mean
+Count of clients with campaign,count
+show day = 84,filter
+What is the max age?,max
+What is the maximum day?,max
+What is the average pdays?,mean
+What is the minimum campaign?,min
+What is the highest day?,max
+What is the min age?,min
+What is the minimum day?,min
+filter previous = 24,filter
+What is the sum age?,sum
+What is the bottom day?,min
+What is the aggregate age?,sum
+Count of clients with campaign,count
+What is the max campaign?,max
+What is the aggregate balance?,sum
+only poutcome = unknown,filter
+Number of of clients with age,count
+What is the max balance?,max
+What is the top duration?,max
+What is the maximum duration?,max
+What is the sum previous?,sum
+What is the avg age?,mean
+How many of clients with poutcome = failure,count
+only contact = telephone,filter
+Count of clients with day,count
+How many of clients with campaign,count
+What is the minimum duration?,min
+What is the lowest balance?,min
+What is the avg campaign?,mean
+What is the add up age?,sum
+What is the total duration?,sum
+Number of of clients with marital = divorced,count
+What is the avg age?,mean
+What is the bottom campaign?,min
+What is the average age?,mean
+What is the lowest balance?,min
+What is the average campaign?,mean
+What is the total pdays?,sum
+with contact = unknown,filter
+How many of clients with marital = single,count
+Count of clients with month = jan,count
+What is the aggregate pdays?,sum
+What is the add up previous?,sum
+What is the average balance?,mean
+Count of clients with default = no,count
+only month = oct,filter
+with contact = cellular,filter
+show poutcome = unknown,filter
+What is the mean pdays?,mean
+What is the minimum campaign?,min
+What is the top pdays?,max
+What is the minimum duration?,min
+What is the maximum age?,max
+How many of clients with loan = no,count
+What is the avg previous?,mean
+What is the avg balance?,mean
+What is the mean age?,mean
+Count of clients with campaign,count
+What is the total age?,sum
+How many of clients with poutcome = unknown,count
+What is the min duration?,min
+What is the max age?,max
+What is the max balance?,max
+Number of of clients with job = management,count
+What is the top day?,max
+What is the highest duration?,max
+filter contact = telephone,filter
+show month = feb,filter
+What is the avg balance?,mean
+What is the total previous?,sum
+filter campaign = 77,filter
+What is the bottom duration?,min
+What is the max campaign?,max
+only previous = 91,filter
+What is the top previous?,max
+What is the avg balance?,mean
+What is the sum pdays?,sum
+What is the sum campaign?,sum
+What is the add up age?,sum
+What is the bottom campaign?,min
+What is the sum pdays?,sum
+What is the aggregate previous?,sum
+What is the lowest age?,min
+filter housing = no,filter
+What is the add up age?,sum
+What is the average previous?,mean
+What is the lowest pdays?,min
+with housing = no,filter
+What is the average pdays?,mean
+What is the min age?,min
+What is the min duration?,min
+Number of of clients with default = yes,count
+What is the lowest campaign?,min
+show marital = single,filter
+How many of clients with campaign,count
+Number of of clients with education = unknown,count
+filter month = dec,filter
+What is the avg age?,mean
+What is the avg previous?,mean
+What is the mean day?,mean
+What is the min age?,min
+What is the top duration?,max
+Number of of clients with campaign,count
+What is the lowest pdays?,min
+What is the avg duration?,mean
+What is the highest previous?,max
+What is the minimum duration?,min
+What is the add up day?,sum
+Count of clients with education = unknown,count
+What is the max duration?,max
+Number of of clients with job = unemployed,count
+where previous = 48,filter
+show loan = yes,filter
+What is the add up day?,sum
+What is the avg age?,mean
+What is the maximum day?,max
+What is the avg age?,mean
+What is the sum campaign?,sum
+filter balance = 34,filter
+What is the add up pdays?,sum
+What is the average day?,mean
+with loan = no,filter
+What is the aggregate age?,sum
+What is the maximum pdays?,max
+How many of clients with balance,count
+What is the average day?,mean
+What is the min age?,min
+What is the average campaign?,mean
+filter pdays = 67,filter
+What is the mean campaign?,mean
+What is the mean day?,mean
+What is the mean balance?,mean
+What is the lowest campaign?,min
+What is the mean age?,mean
+What is the avg balance?,mean
+What is the avg day?,mean
+only housing = no,filter
+What is the max pdays?,max
+What is the top duration?,max
+What is the max campaign?,max
+What is the sum campaign?,sum
+only month = nov,filter
+Count of clients with poutcome = other,count
+What is the lowest duration?,min
+Count of clients with housing = yes,count
+What is the bottom pdays?,min
+What is the sum day?,sum
+What is the avg age?,mean
+What is the average campaign?,mean
+What is the highest pdays?,max
+What is the sum pdays?,sum
+How many of clients with previous,count
+where housing = yes,filter
+filter housing = yes,filter
+What is the add up campaign?,sum
+Count of clients with education = unknown,count
+What is the min campaign?,min
+What is the average pdays?,mean
+What is the add up pdays?,sum
+with default = no,filter
+Number of of clients with contact = cellular,count
+What is the avg balance?,mean
+only pdays = 96,filter
+What is the add up age?,sum
+What is the maximum campaign?,max
+filter age = 84,filter
+What is the aggregate balance?,sum
+Count of clients with job = management,count
+What is the add up previous?,sum
+Number of of clients with housing = yes,count
+What is the mean previous?,mean
+What is the aggregate pdays?,sum
+What is the avg pdays?,mean
+What is the sum age?,sum
+with default = yes,filter
+filter housing = no,filter
+where job = admin.,filter
+where job = admin.,filter
+What is the highest campaign?,max
+What is the sum campaign?,sum
+What is the top duration?,max
+What is the bottom day?,min
+What is the add up campaign?,sum
+where campaign = 47,filter
+What is the minimum campaign?,min
+What is the mean pdays?,mean
+only contact = unknown,filter
+Number of of clients with loan = yes,count
+What is the lowest age?,min
+What is the mean previous?,mean
+What is the mean day?,mean
+filter day = 70,filter
+How many of clients with job = unemployed,count
+What is the minimum pdays?,min
+where education = tertiary,filter
+What is the sum age?,sum
+Count of clients with duration,count
+What is the total balance?,sum
+Number of of clients with housing = no,count
+What is the min campaign?,min
+filter housing = yes,filter
+where month = may,filter
+What is the mean duration?,mean
+with marital = divorced,filter
+What is the lowest campaign?,min
+with default = yes,filter
+Number of of clients with previous,count
+What is the min campaign?,min
+What is the avg day?,mean
+What is the bottom pdays?,min
+What is the add up age?,sum
+What is the top age?,max
+Count of clients with pdays,count
+What is the sum balance?,sum
+What is the top balance?,max
+Number of of clients with education = primary,count
+Number of of clients with balance,count
+Number of of clients with age,count
+What is the aggregate campaign?,sum
+What is the mean previous?,mean
+What is the average age?,mean
+What is the min day?,min
+How many of clients with campaign,count
+What is the add up campaign?,sum
+filter job = unemployed,filter
+filter campaign = 91,filter
+only job = unknown,filter
+What is the add up balance?,sum
+show default = no,filter
+What is the maximum day?,max
+Number of of clients with day,count
+What is the max campaign?,max
+What is the maximum age?,max
+What is the mean previous?,mean
+What is the total age?,sum
+What is the mean campaign?,mean
+What is the average campaign?,mean
+with month = jan,filter
+What is the mean day?,mean
+What is the min balance?,min
+What is the max campaign?,max
+What is the avg duration?,mean
+What is the avg age?,mean
+What is the max pdays?,max
+What is the avg age?,mean
+What is the mean balance?,mean
+How many of clients with loan = yes,count
+How many of clients with job = admin.,count
+show day = 84,filter
+What is the total duration?,sum
+What is the min previous?,min
+How many of clients with balance,count
+What is the total pdays?,sum
+Count of clients with job = housemaid,count
+What is the mean previous?,mean
+with pdays = 60,filter
+What is the average previous?,mean
+What is the max balance?,max
+with contact = telephone,filter
+What is the avg campaign?,mean
+What is the top pdays?,max
+What is the max age?,max
+What is the max age?,max
+Count of clients with campaign,count
+How many of clients with education = secondary,count
+only marital = divorced,filter
+where housing = no,filter
+What is the min day?,min
+What is the avg pdays?,mean
+What is the add up day?,sum
+How many of clients with housing = no,count
+What is the lowest balance?,min
+What is the top previous?,max
+What is the bottom campaign?,min
+filter duration = 46,filter
+What is the avg duration?,mean
+What is the maximum campaign?,max
+What is the average pdays?,mean
+Number of of clients with previous,count
+What is the average duration?,mean
+How many of clients with campaign,count
+What is the bottom duration?,min
+What is the average campaign?,mean
+filter balance = 81,filter
+with loan = no,filter
+What is the total previous?,sum
+What is the average previous?,mean
+What is the top campaign?,max
+What is the avg previous?,mean
+Number of of clients with day,count
+show duration = 83,filter
+What is the aggregate duration?,sum
+Count of clients with month = nov,count
+What is the minimum campaign?,min
+What is the top age?,max
+What is the avg balance?,mean
+What is the lowest campaign?,min
+where default = yes,filter
+What is the lowest age?,min
+What is the mean age?,mean
+What is the mean pdays?,mean
+where loan = yes,filter
+show month = dec,filter
+What is the top pdays?,max
+only marital = divorced,filter
+What is the average day?,mean
+What is the minimum age?,min
+What is the top pdays?,max
+What is the top age?,max
+What is the max duration?,max
+What is the mean campaign?,mean
+What is the total pdays?,sum
+What is the min pdays?,min
+What is the average balance?,mean
+where contact = cellular,filter
+filter previous = 67,filter
+What is the min campaign?,min
+What is the bottom day?,min
+What is the aggregate previous?,sum
+What is the top pdays?,max
+show education = secondary,filter
+Count of clients with housing = yes,count
+What is the total duration?,sum
+What is the highest day?,max
+where day = 81,filter
+What is the minimum campaign?,min
+Count of clients with campaign,count
+What is the maximum campaign?,max
+What is the maximum campaign?,max
+show contact = telephone,filter
+What is the aggregate pdays?,sum
+How many of clients with pdays,count
+What is the avg previous?,mean
+filter day = 6,filter
+Number of of clients with age,count
+What is the sum previous?,sum
+How many of clients with age,count
+What is the avg day?,mean
+What is the avg pdays?,mean
+What is the max duration?,max
+What is the lowest day?,min
+Count of clients with pdays,count
+What is the bottom previous?,min
+What is the min age?,min
+What is the bottom duration?,min
+What is the avg campaign?,mean
+What is the highest balance?,max
+What is the lowest campaign?,min
+show education = primary,filter
+What is the average age?,mean
+show contact = telephone,filter
+Number of of clients with day,count
+What is the average campaign?,mean
+How many of clients with duration,count
+What is the sum previous?,sum
+What is the maximum duration?,max
+How many of clients with education = primary,count
+filter month = jan,filter
+What is the average duration?,mean
+What is the maximum day?,max
+What is the mean campaign?,mean
+What is the top campaign?,max
+What is the maximum previous?,max
+What is the avg day?,mean
+What is the mean duration?,mean
+Number of of clients with duration,count
+filter contact = unknown,filter
+with poutcome = success,filter
+What is the aggregate campaign?,sum
+What is the top pdays?,max
+What is the avg duration?,mean
+Number of of clients with day,count
+What is the sum campaign?,sum
+How many of clients with loan = no,count
+What is the minimum campaign?,min
+What is the minimum duration?,min
+What is the average balance?,mean
+where contact = telephone,filter
+What is the average age?,mean
+What is the bottom day?,min
+What is the min campaign?,min
+show job = unknown,filter
+What is the minimum balance?,min
+where balance = 65,filter
+What is the average previous?,mean
+What is the aggregate campaign?,sum
+What is the minimum campaign?,min
+What is the average age?,mean
+What is the maximum campaign?,max
+What is the aggregate campaign?,sum
+What is the total campaign?,sum
+where pdays = 93,filter
+How many of clients with education = unknown,count
+Count of clients with balance,count
+What is the avg age?,mean
+What is the avg day?,mean
+with previous = 62,filter
+only month = jul,filter
+What is the sum campaign?,sum
+What is the top previous?,max
+What is the lowest balance?,min
+What is the bottom campaign?,min
+How many of clients with balance,count
+only default = no,filter
+What is the average previous?,mean
+What is the total balance?,sum
+What is the sum age?,sum
+What is the max day?,max
+Count of clients with education = tertiary,count
+What is the add up pdays?,sum
+What is the max campaign?,max
+What is the avg age?,mean
+What is the total age?,sum
+What is the minimum campaign?,min
+What is the highest duration?,max
+What is the sum previous?,sum
+What is the avg duration?,mean
+What is the total balance?,sum
+What is the total age?,sum
+What is the add up duration?,sum
+What is the aggregate duration?,sum
+What is the avg balance?,mean
+What is the highest day?,max
+What is the max day?,max
+What is the aggregate day?,sum
+show day = 64,filter
+What is the average balance?,mean
+only education = unknown,filter
+What is the top age?,max
+What is the aggregate campaign?,sum
+show job = admin.,filter
+What is the total day?,sum
+What is the lowest day?,min
+What is the maximum previous?,max
+What is the min previous?,min
+only housing = no,filter
+What is the highest day?,max
+What is the add up age?,sum
+What is the total balance?,sum
+What is the highest age?,max
+What is the min balance?,min
+What is the maximum day?,max
+What is the total pdays?,sum
+What is the average balance?,mean
+Number of of clients with duration,count
+How many of clients with loan = yes,count
+What is the highest balance?,max
+only duration = 74,filter
+What is the add up campaign?,sum
+What is the add up duration?,sum
+What is the minimum duration?,min
+What is the bottom day?,min
+What is the minimum previous?,min
+only marital = single,filter
+What is the max pdays?,max
+with loan = yes,filter
+What is the highest campaign?,max
+What is the average age?,mean
+What is the avg duration?,mean
+What is the sum balance?,sum
+How many of clients with previous,count
+What is the lowest previous?,min
+What is the highest duration?,max
+How many of clients with balance,count
+What is the min balance?,min
+What is the total previous?,sum
+What is the average day?,mean
+Count of clients with poutcome = other,count
+Number of of clients with duration,count
+What is the total pdays?,sum
+What is the add up pdays?,sum
+What is the min day?,min
+Number of of clients with balance,count
+only default = yes,filter
+What is the min balance?,min
