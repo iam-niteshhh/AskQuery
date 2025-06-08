@@ -11,7 +11,7 @@ st.title("AskQuery – Ask Questions About Bank Data")
 
 file_path = "./Data"
 zip_file_name = "bank+marketing.zip"
-csv_file_name = "bank.csv"
+csv_file_name = "bank-full.csv"
 
 try:
     data_handler_usecase = DataUsecase(
