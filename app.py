@@ -6,6 +6,9 @@ from Services.data import DataService
 from Usecases.data_handler import DataUsecase
 from Usecases.query_processing import QueryProcessingUseCase
 from Services.nlp_services import NLPServices
+from nltk.stem.porter import PorterStemmer
+from nltk.tokenize import word_tokenize
+
 st.set_page_config(page_title="AskQuery", layout="wide")
 st.title("AskQuery – Ask Questions About Bank Data")
 
@@ -13,13 +16,19 @@ file_path = "./Data"
 zip_file_name = "bank+marketing.zip"
 csv_file_name = "bank-full.csv"
 
+## needed here as its used for training
+def stem_tokens(text):
+    stemmer = PorterStemmer()
+    tokens = word_tokenize(text)
+    return [stemmer.stem(token) for token in tokens]
+
 try:
     data_handler_usecase = DataUsecase(
         file_path=file_path,
         zip_file_name=zip_file_name,
         csv_file_name=csv_file_name,
     )
-    status, data_set = data_handler_usecase.execute()
+    status, data_set, column_classification = data_handler_usecase.execute()
     st.success("File loaded successfully!")
     # print("loaded")
     if status:
@@ -34,13 +43,14 @@ try:
                 st.markdown("#### Your Query:")
                 st.write(query)
 
-                nlp_services = NLPServices(intent_keywords=constants.INTENT_KEYWORDS)
+                nlp_services = NLPServices(intent_keywords=constants.INTENT_KEYWORDS,)
 
                 # Step 3: Process the query
                 queryprocessing_usecase = QueryProcessingUseCase(
                     nlp_service=nlp_services,
                     query=query,
                     dataframe=data_set,
+                    column_classification=column_classification
                 )
                 result, fig, file_message = queryprocessing_usecase.execute()
 

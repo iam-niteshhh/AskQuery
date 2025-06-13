@@ -31,6 +31,8 @@ class DataUsecase:
 
         data_set =  self.data_service.load_dataset()
 
+        column_classification = self.data_service.classify_columns(data_set,max_unique_values=20, unique_ratio_thresh=0.05)
+
         # get the data set tops
         # print("This is the top Rows")
         # data_set.head()
@@ -39,7 +41,7 @@ class DataUsecase:
         #get data set info
         # data_set.info()
 
-        return True, data_set
+        return True, data_set, column_classification
 
 
 

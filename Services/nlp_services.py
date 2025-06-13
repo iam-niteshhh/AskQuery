@@ -9,8 +9,10 @@ from streamlit import dataframe
 import re
 import pandas as pd
 from Services.charts_services import VisualizationServices
-
+from nltk.stem import PorterStemmer
 import constants
+
+
 
 class NLPServices:
     def __init__(self, intent_keywords):
@@ -22,7 +24,7 @@ class NLPServices:
         tokens = word_tokenize(query.lower())
         return [word for word in tokens if word.isalpha() and word not in self.stop_words]
 
-    def parse_query(self, query, df_columns, threshold = 70):
+    def parse_query(self, query, dataframe, df_columns,  column_classification, threshold = 70,):
 
         # This is rule based Intent Detection
 
@@ -40,23 +42,40 @@ class NLPServices:
 
 
         # This is ML based Intent Detection - Created by Synthetic data
-        print("QUery", query)
+        # print("QUery", query)
         x_vector = self.query_vectorizer.transform([query])
         intent_prediction = self.intent_classifier.predict(x_vector)
 
         best_intent = None
         if intent_prediction:
-            print("this is intent", intent_prediction)
+            # print("this is intent", intent_prediction)
             best_intent = intent_prediction[0]
 
         matched_column = None
         if best_intent is not None:
             matched_column = self.match_column(query, df_columns, threshold)
 
+        filters = None
+        if best_intent is not None and matched_column is not None:
+            filters = self.filter_extraction(
+                query=query,
+                dataframe=dataframe,
+                column_classification=column_classification
+            )
+
+        # print(
+        #     {
+        #         "action": best_intent,
+        #         "column": matched_column[0] if matched_column else None,
+        #         "column_match_score": matched_column[1] if matched_column else None,
+        #         "filters": filters if filters else None,
+        #     }
+        # )
         return {
             "action": best_intent,
             "column": matched_column[0] if matched_column else None,
             "column_match_score": matched_column[1] if matched_column else None,
+            "filters": filters if filters else None,
         }
 
     def match_column(self, user_question, df_columns, threshold=70):
@@ -89,7 +108,7 @@ class NLPServices:
         # for now only return the max matched column
         return matched_columns[0]
 
-    def load_model(self, model_name = 'clf_folded.joblib', vector_name = 'vectorizer_folded.joblib'):
+    def load_model(self, model_name = 'clf_folded_resampled.joblib', vector_name = 'vectorizer_folded_resampled.joblib'):
 
         if not model_name:
             raise Exception('No model path provided.')
@@ -105,6 +124,88 @@ class NLPServices:
 
         return classifier_model, vectorizer
 
+
+
+
+    def filter_extraction(self, query, dataframe, column_classification):
+        filters = []
+        query_lower = query.lower()
+
+        for column in dataframe.columns:
+            column_lower = column.lower().replace("_", " ")
+            col_vals = dataframe[column].dropna().astype(str).unique()
+            col_vals_lower = [v.lower() for v in col_vals]
+
+            col_type = column_classification.get(column, 'categorical')
+
+            # ----- 1. Categorical Value Match -----
+            if col_type == 'categorical':
+                for val, val_lower in zip(col_vals, col_vals_lower):
+                    # Match only when column + value both appear near each other
+                    if (
+                            val_lower in query_lower and column_lower in query_lower) or f"{val_lower} {column_lower}" in query_lower:
+                        negated = (
+                                f"not {val_lower}" in query_lower or
+                                f"don't {val_lower}" in query_lower or
+                                f"do not {val_lower}" in query_lower or
+                                f"not {column_lower}" in query_lower or
+                                f"don't {column_lower}" in query_lower
+                        )
+                        filters.append({
+                            "column": column,
+                            "operator": "!=" if negated else "==",
+                            "value": val
+                        })
+
+                # ----- 2. Yes/No Flags like  -----
+                if "yes" in col_vals_lower and column_lower in query_lower:
+                    if column_lower in query_lower:
+                        negated = (
+                                f"not {column_lower}" in query_lower or
+                                f"don't {column_lower}" in query_lower or
+                                f"do not {column_lower}" in query_lower
+                        )
+                        filters.append({
+                            "column": column,
+                            "operator": "!=" if negated else "==",
+                            "value": "yes"
+                        })
+
+            # ----- 3. Numerical Comparisons -----
+            else:
+                # Use flexible phrase structure
+                col_pattern = column_lower.replace(" ", r"\s*")  # handle underscores
+
+                more_match = re.search(rf"{col_pattern}.*?(above|greater than|more than)\s+(\d+)", query_lower)
+                if more_match:
+                    filters.append({
+                        "column": column,
+                        "operator": ">",
+                        "value": float(more_match.group(2))
+                    })
+                    continue  # avoid multiple matches
+
+                less_match = re.search(rf"{col_pattern}.*?(below|less than|under)\s+(\d+)", query_lower)
+                if less_match:
+                    filters.append({
+                        "column": column,
+                        "operator": "<",
+                        "value": float(less_match.group(2))
+                    })
+                    continue
+
+                equal_match = re.search(rf"{col_pattern}.*?(equal to|=|is)\s+(\d+)", query_lower)
+                if equal_match:
+                    filters.append({
+                        "column": column,
+                        "operator": "==",
+                        "value": float(equal_match.group(2))
+                    })
+                    continue
+
+        return filters
+
+
 class IntentExecutorServices:
     def __init__(self, dataframe, query_intent):
         self.dataframe = dataframe
@@ -114,7 +215,7 @@ class IntentExecutorServices:
         action = self.query_intent.get("action")
         column = self.query_intent.get("column")
 
-        print(action, column)
+        # print(action, column)
         if not action or not column:
             raise ValueError("Could not understand the intent or column.")
 

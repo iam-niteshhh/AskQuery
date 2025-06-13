@@ -78,3 +78,19 @@ class DataService:
         dataset = pd.read_csv(file_full_path,delimiter=';')
 
         return dataset
+
+    def classify_columns(self, dataframe, unique_ratio_thresh=0.05, max_unique_values=20):
+        classification = {}
+        for col in dataframe.columns:
+            series = dataframe[col]
+            nunique = series.nunique()
+            total = len(series)
+            unique_ratio = nunique / total if total > 0 else 0
+
+            if not pd.api.types.is_numeric_dtype(series):
+                classification[col] = 'categorical'
+            elif nunique <= max_unique_values or unique_ratio < unique_ratio_thresh:
+                classification[col] = 'categorical'
+            else:
+                classification[col] = 'continuous'
+        return classification

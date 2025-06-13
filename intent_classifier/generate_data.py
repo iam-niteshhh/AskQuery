@@ -33,73 +33,89 @@ COLUMNS = {
     "poutcome": ["unknown", "other", "failure", "success"]
 }
 
-def generate_synthetic_queries(n=10000):
+def classify_columns(df, unique_ratio_thresh=0.05, max_unique_values=20):
     """
-    Generate synthetic natural language queries for intent classification.
+    Automatically classify columns in a DataFrame as 'categorical' or 'continuous'.
+
+    Returns:
+        dict: column_name -> 'categorical' or 'continuous'
+    """
+    classification = {}
+
+    for col in df.columns:
+        series = df[col]
+        nunique = series.nunique()
+        total = len(series)
+        unique_ratio = nunique / total
+
+        if not pd.api.types.is_numeric_dtype(series):
+            classification[col] = 'categorical'
+        elif nunique <= max_unique_values or unique_ratio < unique_ratio_thresh:
+            classification[col] = 'categorical'
+        else:
+            classification[col] = 'continuous'
+
+    return classification
+
+def generate_synthetic_queries(data_frame, n=10000, columns=COLUMNS):
+    """
+    Generate balanced synthetic queries for each intent type.
 
     Args:
-        n (int): Number of queries to generate.
+        n (int): Total number of queries to generate.
 
     Returns:
         pd.DataFrame: DataFrame with columns 'query' and 'intent'.
     """
     queries = []
-    for _ in range(n):
-        # Pick a random intent from the defined intent keywords
-        intent = random.choice(list(INTENT_KEYWORDS.keys()))
-        # Pick a random keyword associated with the intent
-        keyword = random.choice(INTENT_KEYWORDS[intent])
-        # Pick a random column from the dataset columns
-        column = random.choice(list(COLUMNS.keys()))
-        # Get the column's data type or possible categories
-        col_type = COLUMNS[column]
+    intents = list(INTENT_KEYWORDS.keys())
+    n_per_intent = n // len(intents)
 
-        # For aggregate intents, only numeric columns make sense
-        if intent in ["mean", "sum", "max", "min"]:
-            if col_type != "numeric":
-                # Retry picking a column until it's numeric
-                while col_type != "numeric":
-                    column = random.choice(list(COLUMNS.keys()))
-                    col_type = COLUMNS[column]
-            # Construct a natural language query asking for the aggregate on the column
-            query = f"What is the {keyword} {column}?"
+    for intent in intents:
+        count = 0
+        while count < n_per_intent:
+            keyword = random.choice(INTENT_KEYWORDS[intent])
+            column = random.choice(list(columns.keys()))
+            col_type = columns[column]
 
-        elif intent == "count":
-            # Counting number of clients with some attribute
-            query = f"{keyword.capitalize()} of clients with {column}"
-            # If the column is categorical, add a specific category value to the query
-            if col_type != "numeric":
-                val = random.choice(col_type)
-                query += f" = {val}"
+            # Handle intents only valid for numeric columns
+            if intent in ["mean", "sum", "max", "min"]:
+                if col_type != "continuous":
+                    continue
+                query = f"What is the {keyword} {column}?"
 
-        elif intent == "filter":
-            # Filtering rows with column equal to some value
-            if col_type == "numeric":
-                # Generate a random numeric value for numeric columns
-                val = random.randint(1, 100)
+            elif intent == "count":
+                query = f"{keyword.capitalize()} of clients with {column}"
+                if col_type == "categorical":
+                    val = random.choice(data_frame[column].dropna().unique())
+                    query += f" = {val}"
+
+            elif intent == "filter":
+                if col_type == "categorical":
+                    val = random.choice(data_frame[column].dropna().unique())
+                else:
+                    val = float(data_frame[column].dropna().sample(1).values[0])
+                query = f"{keyword} {column} = {val}"
+
             else:
-                # Pick a random category for categorical columns
-                val = random.choice(col_type)
-            query = f"{keyword} {column} = {val}"
+                query = f"{keyword} {column}"
 
-        else:
-            # Default fallback query format if intent doesn't match above
-            query = f"{keyword} {column}"
+            queries.append((query, intent))
+            count += 1
 
-        # Append the generated query and its intent label
-        queries.append((query, intent))
-
-    # Return as a DataFrame for easy downstream ML processing
     return pd.DataFrame(queries, columns=["query", "intent"])
 
 if __name__ == "__main__":
     # Ensure the 'data' directory exists to save the output CSV
     os.makedirs("../Data", exist_ok=True)
+    data_frame = pd.read_csv('../Data/bank-full.csv', delimiter=';')
 
-    # Generate 1000 synthetic queries
-    df = generate_synthetic_queries(1000)
-
-    # Save the generated dataset to CSV for training/testing intent model
-    df.to_csv("../Data/intent_dataset.csv", index=False)
+    categorical_data = classify_columns(data_frame, unique_ratio_thresh=0.05, max_unique_values=20)
+    # print(categorical_data)
+    # # Generate 1000 synthetic queries
+    df = generate_synthetic_queries(n=3000, columns=categorical_data, data_frame = data_frame)
+    #
+    # # Save the generated dataset to CSV for training/testing intent model
+    df.to_csv("../Data/intent_dataset_new.csv", index=False)
 
     print("Generated intent queries saved to data/intent_dataset.csv")
